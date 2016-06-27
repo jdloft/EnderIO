@@ -82,7 +82,7 @@ public class RedstoneConduit extends AbstractConduit implements IRedstoneConduit
   }
 
   @Override
-  public boolean canConnectToExternal(ForgeDirection direction) {
+  public boolean canConnectToExternal(ForgeDirection direction, boolean ignoreDisabled) {
     TileEntity te = bundle.getEntity();
     World world = te.worldObj;
     if (world == null) {
@@ -120,7 +120,7 @@ public class RedstoneConduit extends AbstractConduit implements IRedstoneConduit
   public Set<Signal> getNetworkInputs() {
     Set<Signal> res = new HashSet<Signal>();
     for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-      if (canConnectToExternal(dir)) {
+      if (canConnectToExternal(dir, false)) {
         int input = getExternalPowerLevel(dir);
         if (input > 1) { // need to degrade external signals by one as they
                          // enter

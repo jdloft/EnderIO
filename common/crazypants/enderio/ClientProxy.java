@@ -17,6 +17,7 @@ import crazypants.enderio.conduit.TileConduitBundle;
 import crazypants.enderio.conduit.facade.FacadeRenderer;
 import crazypants.enderio.conduit.liquid.LiquidConduit;
 import crazypants.enderio.conduit.liquid.LiquidConduitRenderer;
+import crazypants.enderio.conduit.me.MeConduit;
 import crazypants.enderio.conduit.power.PowerConduit;
 import crazypants.enderio.conduit.power.PowerConduitRenderer;
 import crazypants.enderio.conduit.redstone.RedstoneConduit;
@@ -65,6 +66,7 @@ public class ClientProxy extends CommonProxy {
     RedstoneSwitch.initIcons();
     PowerConduit.initIcons();
     LiquidConduit.initIcons();
+    MeConduit.initIcons();
     TriggerIconProvider.initIcons();
   }
 

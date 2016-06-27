@@ -19,7 +19,7 @@
 
     <property name="mc.version" value="1.5.2"/>
     <property name="forge.version" value="7.8.1.738"/>
-    <property name="project.version" value="0.3.6"/>
+    <property name="project.version" value="0.4.0"/>
 
     <property name="forge.name" value="forge-${mc.version}-${forge.version}-src.zip"/>
 
@@ -86,6 +86,33 @@
         </exec>
     </target>
 
+    <target name="stuff">
+        <!-- Copy sources -->
+        <copy todir="${mcpsrc.dir}/minecraft">
+            <fileset dir="${src.dir}/common"/>
+            <filterset>
+                <filter token="VERSION" value="${project.version.full}" />
+                <filter token="BUILD_NUMBER" value="${build.number}" />
+            </filterset>
+        </copy>
+
+        <unzip dest="${mcpsrc.dir}/minecraft" src="${src.dir}/lib/neiDummyInterface-src.zip"/>
+        <copy todir="${mcp.dir}/lib">
+            <fileset dir="${src.dir}/lib"/>
+        </copy>
+
+        <delete file="${mcp.dir}/lib/neiDummyInterface.jar"/>
+        <delete file="${mcp.dir}/lib/neiDummyInterface-src.zip"/>
+
+        <!-- Copy resources -->
+        <copy todir="${mcp.dir}/eclipse/Minecraft/bin/crazypants">
+            <fileset dir="${resources.dir}">
+                <exclude name="build.xml"/>
+                <exclude name="**/*.pdn"/>
+            </fileset>
+        </copy>
+    </target>
+
     <target name="compile" depends="initialize-version,setup">
         <delete dir="${classes.dir}"/>
         <mkdir dir="${classes.dir}"/>
@@ -147,7 +174,17 @@
         </copy>
 
         <!-- Reset src dir to post-forge-install state -->
+        <delete dir="${mcpsrc.dir}/minecraft/appeng"/>
+        <delete dir="${mcpsrc.dir}/minecraft/buildcraft"/>
         <delete dir="${mcpsrc.dir}/minecraft/crazypants"/>
+        <delete dir="${mcpsrc.dir}/minecraft/thermalexpansion"/>
+    </target>
+
+    <target name="remove">
+        <delete dir="${mcpsrc.dir}/minecraft/appeng"/>
+        <delete dir="${mcpsrc.dir}/minecraft/buildcraft"/>
+        <delete dir="${mcpsrc.dir}/minecraft/crazypants"/>
+        <delete dir="${mcpsrc.dir}/minecraft/thermalexpansion"/>
     </target>
 
     <!-- Package the compiled files -->
@@ -156,7 +193,7 @@
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}-${mc.version}-${project.version.full}.jar" basedir="${classes.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}-${mc.version}-${project.version.full}.jar">
-            <fileset dir="${classes.dir}" includes="crazypants/, buildcraft/"/>
+            <fileset dir="${classes.dir}" includes="crazypants/, buildcraft/, appeng/"/>
             <zipfileset includes="**/*.class" src="${lib.dir}/cglib-nodep-2.2.3.jar"/>
             <fileset dir="${resources.dir}">
                 <exclude name="build.xml"/>

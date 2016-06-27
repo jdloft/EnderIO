@@ -6,10 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import appeng.api.WorldCoord;
+import appeng.api.me.util.IGridInterface;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.LiquidStack;
@@ -25,6 +28,7 @@ import crazypants.enderio.conduit.geom.ConduitGeometryUtil;
 import crazypants.enderio.conduit.geom.Offset;
 import crazypants.enderio.conduit.geom.Offsets;
 import crazypants.enderio.conduit.liquid.ILiquidConduit;
+import crazypants.enderio.conduit.me.IMeConduit;
 import crazypants.enderio.conduit.power.IPowerConduit;
 import crazypants.enderio.power.MutablePowerProvider;
 import crazypants.util.BlockCoord;
@@ -179,8 +183,9 @@ public class TileConduitBundle extends TileEntity implements IConduitBundle {
     }
   }
 
-  public BlockCoord getLocation() {
-    return new BlockCoord(xCoord, yCoord, zCoord);
+  @Override
+  public WorldCoord getLocation() {
+    return new WorldCoord(xCoord, yCoord, zCoord);
   }
 
   @Override
@@ -556,4 +561,73 @@ public class TileConduitBundle extends TileEntity implements IConduitBundle {
     return null;
   }
 
+  @Override
+  public float getPowerDrainPerTick() {
+    IMeConduit ic = getConduit(IMeConduit.class);
+    if(ic != null) {
+      return ic.getPowerDrainPerTick();
+    }
+    return 0;
+  }
+
+  @Override
+  public void setNetworkReady(boolean isReady) {
+    IMeConduit ic = getConduit(IMeConduit.class);
+    if(ic != null) {
+      ic.setNetworkReady(isReady);
+    }
+  }
+
+  @Override
+  public boolean isMachineActive() {
+    IMeConduit ic = getConduit(IMeConduit.class);
+    if(ic != null) {
+      return ic.isMachineActive();
+    }
+    return false;
+  }
+
+  @Override
+  public boolean isValid() {
+    return getConduit(IMeConduit.class) != null;
+  }
+
+  @Override
+  public void setPowerStatus(boolean hasPower) {
+    IMeConduit ic = getConduit(IMeConduit.class);
+    if(ic != null) {
+      ic.setPoweredStatus(hasPower);
+    }
+  }
+
+  @Override
+  public boolean isPowered() {
+    IMeConduit ic = getConduit(IMeConduit.class);
+    if(ic != null) {
+      return ic.isPowered();
+    }
+    return false;
+  }
+
+  @Override
+  public IGridInterface getGrid() {
+    IMeConduit ic = getConduit(IMeConduit.class);
+    if(ic != null) {
+      return ic.getGrid();
+    }
+    return null;
+  }
+
+  @Override
+  public void setGrid(IGridInterface gi) {
+    IMeConduit ic = getConduit(IMeConduit.class);
+    if(ic != null) {
+      ic.setGrid(gi);
+    }
+  }
+
+  @Override
+  public World getWorld() {
+    return worldObj;
+  }
 }

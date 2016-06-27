@@ -24,6 +24,7 @@ import crazypants.enderio.conduit.facade.BlockConduitFacade;
 import crazypants.enderio.conduit.facade.ItemConduitFacade;
 import crazypants.enderio.conduit.geom.ConduitGeometryUtil;
 import crazypants.enderio.conduit.liquid.ItemLiquidConduit;
+import crazypants.enderio.conduit.me.ItemMeConduit;
 import crazypants.enderio.conduit.power.ItemPowerConduit;
 import crazypants.enderio.conduit.redstone.ItemRedstoneConduit;
 import crazypants.enderio.enderface.BlockEnderIO;
@@ -63,7 +64,7 @@ import crazypants.enderio.material.MaterialRecipes;
 import crazypants.enderio.trigger.TriggerEnderIO;
 import crazypants.enderio.trigger.TriggerProviderEIO;
 
-@Mod(name = "EnderIO", modid = "EnderIO", version = "0.3.6", dependencies = "required-after:Forge@[7.1,);required-after:FML@[5.0.5,)")
+@Mod(name = "EnderIO", modid = "EnderIO", version = "0.4.0", dependencies = "required-after:Forge@[7.1,);required-after:FML@[5.0.5,)")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { "EnderIO" }, packetHandler = PacketHandler.class)
 public class EnderIO {
 
@@ -104,6 +105,7 @@ public class EnderIO {
   public static ItemRedstoneConduit itemRedstoneConduit;
   public static ItemPowerConduit itemPowerConduit;
   public static ItemLiquidConduit itemLiquidConduit;
+  public static ItemMeConduit itemMeConduit;
 
   // Machines
   public static BlockStirlingGenerator blockStirlingGenerator;
@@ -170,6 +172,7 @@ public class EnderIO {
     itemRedstoneConduit = ItemRedstoneConduit.create();
     itemPowerConduit = ItemPowerConduit.create();
     itemLiquidConduit = ItemLiquidConduit.create();
+    itemMeConduit = ItemMeConduit.create();
 
     blockElectricLight = BlockElectricLight.create();
     blockLightNode = BlockLightNode.create();

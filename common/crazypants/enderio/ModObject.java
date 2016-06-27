@@ -20,6 +20,9 @@ public enum ModObject {
 
   // Liquid
   itemLiquidConduit(++Config.IID, CATEGORY_ITEM, "Fluid Conduit"),
+  
+  // ME
+  itemMeConduit(++Config.IID, CATEGORY_ITEM, "ME Conduit"),
 
   // Materials
   itemBasicCapacitor(++Config.IID, CATEGORY_ITEM, "Basic Capacitor"),

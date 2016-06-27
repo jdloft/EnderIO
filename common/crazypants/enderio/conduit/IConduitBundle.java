@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import appeng.api.me.tiles.IGridMachine;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ITankContainer;
@@ -13,7 +14,7 @@ import crazypants.enderio.conduit.geom.CollidableComponent;
 import crazypants.enderio.conduit.geom.Offset;
 import crazypants.enderio.power.IInternalPowerReceptor;
 
-public interface IConduitBundle extends IInternalPowerReceptor, ITankContainer {
+public interface IConduitBundle extends IInternalPowerReceptor, ITankContainer, IGridMachine {
 
   TileEntity getEntity();
 

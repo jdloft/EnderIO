@@ -532,11 +532,6 @@ public class LiquidConduit extends AbstractConduit implements ILiquidConduit {
   }
 
   @Override
-  public boolean canConnectToExternal(ForgeDirection direction) {
-    return getExternalHandler(direction) != null;
-  }
-
-  @Override
   public ITankContainer getExternalHandler(ForgeDirection direction) {
     ITankContainer con = getTankContainer(getLocation().getLocation(direction));
     return (con != null && !(con instanceof IConduitBundle)) ? con : null;
